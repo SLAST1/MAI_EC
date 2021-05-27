@@ -1,0 +1,321 @@
+(py37) ➜  ~ cat header23.h 
+#ifndef _COM_
+#define _COM_
+
+#include<stdio.h>
+#include<stdbool.h>
+#include<math.h>
+#include<stdlib.h>
+
+#include"tree.h"
+
+float fAbs(float f){ //модуль числа
+    if(f < 0)
+        return -f;
+    return f;
+    }
+
+// PRINT
+
+void prI(TNode*, int);
+void node_print(TNode *node){
+    if(node->right)
+        prI(node->right, 1);
+    printf("%.4f\n", node->data);
+    if(node->left)
+        prI(node->left, 1);
+    }
+void prI(TNode *node, int iter){
+    if(node->right)
+        prI(node->right, iter+1);
+    for(int i=0; i<iter; i++)
+        printf("   ");
+    printf("%.4f\n", node->data);
+    if(node->left)
+        prI(node->left, iter+1);
+    }
+
+// ADD
+
+void node_add(TNode *node, float toAdd){
+    if(isnan( node->data )){
+        node->data = toAdd;
+        node->left = NULL;
+        node->right = NULL;
+        return;
+        }
+    if(toAdd <= node->data){
+        if(node->left){
+            node_add(node->left, toAdd);
+            return;
+            }
+        else{
+            node->left = malloc( sizeof(TNode) );
+            node->left->data = toAdd;
+            node->left->left = NULL;
+            node->left->right = NULL;
+            return;
+            }
+        }
+    else{
+        if(node->right){
+            node_add(node->right, toAdd);
+            return;
+            }
+        else{
+            node->right = malloc( sizeof(TNode) );
+            node->right->data = toAdd;
+            node->right->left = NULL;
+            node->right->right = NULL;
+            return;
+            }
+        }
+    }
+
+// REMOVE
+
+int node_countChildren(TNode *n){
+    int count = 0;
+    if(n->left)
+        count++;
+    if(n->right)
+        count++;
+    return count;
+    }
+
+TNode *node_search(TNode *n, float f, float d, TNode **p);
+TNode *node_min(TNode *n, TNode **p);
+void node_rm(TNode *node, float toRem, float delta, TNode **rootP){
+    TNode *parent = NULL;
+    TNode *nRM = node_search(node, toRem, delta, &parent); //node ReMove
+    if(!nRM)
+        return;
+}
+
+#endif
+(py37) ➜  ~ cat tree.h 
+#ifndef _TREE_H_
+#define _TREE_H_
+
+typedef struct TNode{
+    float data;
+    struct TNode *left, *right;
+    } TNode;
+
+#endif
+(py37) ➜  ~ cat LABA23.c 
+#include<stdio.h>
+#include<stdbool.h>
+#include<math.h>
+#include<stdlib.h>
+
+#include"tree.h"
+#include"command.h"
+
+TNode *Tree;
+
+void node_add   (TNode *node, float toAdd);
+void node_print (TNode *node);
+void node_rm    (TNode *node, float toRem, float delta, TNode **rootPointer);
+void help       ();
+
+
+int avlDepth_arr[3];
+bool AVL_flag;
+void rec_depthfinder(TNode *n, int d);
+void node_AVLDepth(TNode *node){
+    AVL_flag = true;
+    for(int i=0; i<3; i++)
+        avlDepth_arr[i] = 0;
+
+    rec_depthfinder(node, 0);
+
+    if(AVL_flag)
+        printf("Дерево - AVL\n");
+    else
+        printf("Дерево - не AVL\n");
+
+    return;
+    }
+
+void rec_depthfinder(TNode *node, int d){
+    if(!AVL_flag)
+        return;
+
+    int kids = 0;
+    if(node->left)
+        kids++;
+    if(node->right)
+        kids++;
+
+    if(kids == 0){
+        for(int i=0; i<3; i++){
+            int _d = avlDepth_arr[i];
+            if(_d == 0){
+                avlDepth_arr[i] = d;
+                break;
+            }
+            if(_d == d)
+                break;
+            if(abs(_d - d) <= 1)
+                continue;
+            AVL_flag = false;
+            return;
+        }
+    }
+    else{
+        if(node->left)
+            rec_depthfinder(node->left, d+1);
+        if(node->right)
+            rec_depthfinder(node->right, d+1);
+    }
+}
+
+int main(){
+    Tree = NULL;
+
+    printf("h\t- (help) справка\n");
+    printf("\n> ");
+
+    char command;
+    float flIn;
+    while(true){
+        command = getchar();
+
+        switch(command){
+            case 'h':
+                help();
+                break;
+            case 'a':
+                if(scanf("%f", &flIn) == 1){
+                    if(Tree)
+                        node_add(Tree, flIn);
+                    else{
+                        Tree = malloc( sizeof(TNode) );
+                        Tree->data = flIn;
+                        }
+                    }
+                else
+                    printf("Неверный ввод\n");
+                break;
+            case 'v':
+                if(Tree)
+                    node_print(Tree);
+                else
+                    printf("Дерево отсутсвует\n");
+                break;
+            case 'r':
+                if(scanf("%f", &flIn) == 1){
+                    if(Tree)
+                        node_rm(Tree, flIn, 0.0001, &Tree);
+                    else
+                        printf("Дерево уже пусто\n");
+                    }
+                else
+                    printf("Неверный ввод\n");
+                break;
+            case 'd':
+                if(!Tree){
+                    printf("Дерево отсутсвует\n");
+                    break;
+                }
+                node_AVLDepth(Tree);
+                break;
+            case 'q':
+                printf("\n");
+                return 0;
+            case ' ' :
+                break;
+            case '\n':
+                printf("> ");
+                break;
+            default:
+                printf("?");
+                break;
+            }
+        }
+
+    return 0;
+    }
+
+void help(){
+    printf("\n");
+    printf("h - (help)   эта справка\n");
+    printf("a - (add)    Добавить узел\n");
+    printf("v - (view)   Отобразить дерево\n");
+    printf("r - (remove) Удалить узел\n");
+    printf("d - (AVL)  Вывод вида дерева\n");
+    printf("q - (quit)   Выход\n");
+    printf("\n");
+    }%
+(py37) ➜  ~ gcc LABA23.c header23.h -o tree
+(py37) ➜  ~ ./tree
+h   - (help) справка
+
+> h
+
+h - (help)   эта справка
+a - (add)    Добавить узел
+v - (view)   Отобразить дерево
+r - (remove) Удалить узел
+d - (AVL)  Вывод вида дерева
+q - (quit)   Выход
+
+> v 
+Дерево отсутсвует
+> d
+Дерево отсутсвует
+> a
+0
+> a
+2
+> a
+3
+> a
+1
+> a
+-2
+> a 
+-1
+> a
+-3
+> v
+      3.0000
+   2.0000
+      1.0000
+0.0000
+      -1.0000
+   -2.0000
+      -3.0000
+> d
+Дерево - AVL
+> a  
+5
+> a
+6
+> v
+            6.0000
+         5.0000
+      3.0000
+   2.0000
+      1.0000
+0.0000
+      -1.0000
+   -2.0000
+      -3.0000
+> d
+Дерево - не AVL
+> r 
+6
+> v
+         5.0000
+      3.0000
+   2.0000
+      1.0000
+0.0000
+      -1.0000
+   -2.0000
+      -3.0000
+> d
+Дерево - AVL
+> 

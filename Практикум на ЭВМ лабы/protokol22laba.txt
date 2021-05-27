@@ -1,0 +1,109 @@
+\documentclass[12pt]{book}
+\usepackage[12pt]{extsizes} 
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=5mm,footsep=5mm]{geometry}
+\usepackage[russian, english]{babel}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[CO]{СИСТЕМЫ МНОЖЕСТВ}
+\fancyhead[LO]{\S5]} 
+\fancyhead[CE]{ЭЛЕМНТЫ ТЕОРИИ МНОЖЕСТВ}
+\fancyhead[RE]{[ГЛ. I}
+\fancyfoot{}
+
+\usepackage{amsmath,amssymb,setspace}
+
+\begin{document}
+
+\pagestyle{empty}
+\setcounter{page}{43}
+\pagestyle{fancy}
+
+О п р е д е л е н и е 2. Система множеств $\mathfrak{S}$ называется {\itshape полу- \linebreak кольцом}, если она содержит пустое множество $\oslash$, замкнута по \linebreak отношению к образованию пересечений и обладает тем свой- \linebreak ством, что из принадлежности к $\mathfrak{S}$ множеств $A$ и $A_1 \subset A$ выте- \linebreak кает возможность представления $A$ в виде $A=\bigcup\limits_{k=1}^n A_k$, где $A_k$ ~--- \linebreak попарно пересекающиеся множества из $\mathfrak{S}$, первое из которых \linebreak есть заданное множество из $A_1$.
+
+В дальнейшем всякий набор попарно пересекающихся мно- \linebreak жеств $A_1$, $A_2$, \ldots, $A_n$, объединение которых есть заданное мно- \linebreak жество $A$, мы будем называть {\itshape конечным разложением} множе- \linebreak ства $A$.
+
+Всякое кольцо множеств $\mathfrak{R}$ является полукольцом, так как \linebreak если $A$ и $A_1 \subset A$ входят в $\mathfrak{R}$, то имеет место разложение
+
+\begin{center}
+    $A = A_1 \cup A_2$, где $A_2 = A ~\textbackslash~ A_1 \in \mathfrak{R}$.
+\end{center}
+
+Примером полукольца, не являющегося кольцом множеств, \linebreak может служить совокупность всех интервалов $(a, b)$, отрезков \linebreak $[a, b]$ и полуинтервалов $[a, b)$ и $(a, b]$ на числовой прямой $~^1)$. Еще \linebreak одним примером служит совокупность всех <<полуоткрытых>> пря- \linebreak моугольников $ a < x \leqslant b $, $ c < y \leqslant d $ на плоскости или совокуп- \linebreak ность всех полуоткрытых параллелепипедов в пространстве.
+
+Установим следующие свойства полуколец множеств.
+
+Л е м м а 1. {\itshape Пусть множества $A_1$, $A_2$, ..., $A_n$, $A$  принадлежат \linebreak полукольцу $\mathfrak{S}$, причём множества $A_i$ попарно не пересекаются \linebreak и все содержатся в $A$. Тогда набор множеств $A_i$ ($i=1, 2, \ldots \linebreak \ldots, n$) можно дополнить множествами $A_\text{n+1}$, \ldots, $A_s \in \mathfrak{S}$ до ко- \linebreak нечного разложения}
+
+\begin{center}
+    $A=\bigcup\limits_{k=1}^s A_k (s \geqslant n)$
+\end{center}
+
+{\itshape можества} $A$.
+
+Д о к а з а т е л ь с т в о проведём по индукции. При $n=1$ \linebreak справедливость утверждения леммы вытекает из определения \linebreak полукольца. Предположим, что это утверждение справедливо \linebreak для $n=m$ и рассмотрим $m+1$ множеств $A_1$, \ldots, $A_m$, $A_\text{m+1}$, \linebreak удовлетворяющих условиям леммы. По сделанному предполо- \linebreak жению,
+
+\begin{center}
+    $A=A_1 \cup A_2 \cup ... \cup A_m \cup B_1 \cup B_2 \cup ... \cup B_p,$
+\end{center}
+
+где все множества $B_q$ (q = 1, 2, \ldots, p) принадлежат $\mathfrak{S}$. Поло- \linebreak жим $B_q_1 = A_\text{m+1} ~\bigcap~ B_q$. По определению полукольца, имеется раз- \linebreak ложение $B_q = B_q_1 ~\bigcup~ B_q_2 ~\bigcup~ \ldots ~\bigcup~ B_q_r$, где все $B_q_j$ принадлежат $\mathfrak{S}$. \linebreak
+
+\footnote{) При этом в число интервалов включается, конечно, <<пустой>> интервал (a, a), а в число отрезков ~--- отрезок, состоящий из одной точки [a, a].}
+
+\newpage
+\noindent Легко видеть, что
+
+\begin{center}
+    $A=A_1 \cup ... \cup A_m \cup A_\text{m+1} \cup \bigcup\limits_{q=1}^p (\bigcup\limits_{j=2}^{r_q} B_q_j)$.
+\end{center}
+
+\noindent Таким образом, утверждение леммы доказано для $n=m+1$, \linebreak а следовательно, и вообще для всех $n$.
+
+Л е м м а 2. {\itshape Какова бы ни была конечная система множеств} \linebreak $A_1$, \ldots, $A_n$, {\itshape принадлежащих полукольцу $\mathfrak{S}$, в $\mathfrak{S}$ найдётся такая} \linebreak {\itshape конечная система попарно пересекающихся множеств $B_1$, \ldots \linebreak \ldots, $B_t$, что каждое $A_k$ может быть представлено в виде суммы} \linebreak
+
+\begin{center}
+    $A_k = \bigcup\limits_{s \in M_k} B_s$
+\end{center}
+
+{\itshape некоторых из множеств $B_s$}.
+
+Д о к а з а т е л ь с т в о. При $n = 1$ лемма тривиальна, так как \linebreak достаточно положить $t=1$, $B_1=A_1$. Допустим, что она спра- \linebreak ведлива для $n = m$, и рассмотрим в $\mathfrak{S}$ некоторую систему мно- \linebreak жеств $A_1$, \ldots~$A_m$, $A_\text{m+1}$. Пусть $B_1$, $B_2$, \ldots, $B_t$ ~--- множества из $\mathfrak{S}$, \linebreak удовлетворяющие условиям леммы по отношению к $A_1$, $A_2$, \ldots \linebreak \ldots, $A_m$. Положим
+
+\begin{center}
+    $B_s_1 = A_\text{m+1} \cap B_s$.
+\end{center}
+
+\noindent В силу леммы 1 имеет место разложение
+
+\begin{center}
+    $$A_\text{m+1} = \bigcup\limits_{s=1}^t B_s_1 \cup \bigcup\limits_{p=1}^q B'_p, B'_p \in \mathfrak{S},\eqno (1)$$
+\end{center}
+
+а в силу самого определения полукольца имеет место разло- \linebreak жение
+
+\begin{center}
+    $B_s = B_s_1 \cup B_s_2 \cup \ldots \cup B_s_f__s$, $B_s_j \in \mathfrak{S}$.
+\end{center}
+
+\noindent Легко видеть, что
+
+\begin{center}
+    $A_k=\bigcup\limits_{s \in M_k} \bigcup\limits_{j=1}^{f_s} B_s_j,~k = 1,~2,~\ldots, m$,
+\end{center}
+
+и что множества
+
+\begin{center}
+    $B_s_j, B'_p$
+\end{center}
+
+попарно не пересекаются. Таким образом, множества $B_s_j$, $B'_p$ \linebreak удовлетворяют условиям леммы по отношению к $A_1$, \ldots, $A_m$, \linebreak $A_\text{m+1}$.
+
+{\bf3.Кольцо, порождённое полукольцом.} Мы уже видели в п.1, \linebreak что для каждой системы множеств $\mathfrak{S}$ существует единственное \linebreak минимальное кольцо, содержащее $\mathfrak{S}$. Однако для произвольной \linebreak системы $\mathfrak{S}$ фактическое построение кольца $\mathfrak{R}(\mathfrak{S})$ по $\mathfrak{S}$ довольно \linebreak сложно. Оно становится вполне обозримым в том важном слу- \linebreak чае, когда $\mathfrak{S}$ представляет собой полукольцо. Это построение \linebreak даётся следующей теоремой.
+\end{document}

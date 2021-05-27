@@ -1,0 +1,157 @@
+daniel@daniel:~$ cat head.txt
+------------------------------------------
+| Лабораторная работа №13                |
+  Множества в Си
+  Выполнил: студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич            |
+------------------------------------------
+daniel@daniel:~$ cat Set.h
+#define N 26
+
+char A='A';
+char Z='Z';
+char a='a';
+char z='z';
+
+char Alph[2*N+1];  
+
+void ClearSet(char S[])                   
+{ for(int i=0;i<N;i++)S[i]=S[N+i]=0; }
+
+int Letter(char c)                   
+{ return (c>=a&&c<=z)||(c>=A&&c<=Z); }
+
+void CreateSet(char W[], char S[])    
+{ char c;
+  for(int i=0;i<N;i++)S[i]=S[N+i]=0;
+  for(int i=0;(c=W[i]);i++)
+  if(c>=a&&c<=z) S[c-a]=1; else
+  if(c>=A&&c<=Z) S[N+c-A]=1;
+}
+
+void DisplaySet(char S[])                   
+{
+  Alph[0]=a; Alph[N] = A; Alph[2 * N] = 0;
+  for(int i=1;i<N;i++)
+  { Alph[i]=Alph[i-1]+1;
+   Alph[i+N]=Alph[i+N-1]+1; }      
+   printf("\n%s\n",Alph);           
+  for(int i=0;i<2*N;i++)
+  printf("%1d",S[i]); printf("\n");  
+}
+
+void ComplementarySet(char S1[], char S2[])     
+{ for(int i=0; i<2*N;i++)
+    if(S1[i]==0) S2[i]=1; else S2[i]=0;
+}
+
+int FindInSet(char c, char S[])           
+{ if(Letter(c))
+    if(c>=a) return S[c-a]==1; else return S[c+N-A]==1;
+  else return 0;
+}
+daniel@daniel:~$ cat 22.c 
+#include <stdio.h>
+#include "Set.h"
+
+char AllVovels[]="aeiouyAEIOUY"; 
+
+char Word[30];                  
+char Sv[2*N];              
+char Sc[2*N];                   
+
+int main() {
+    int i = 0, n = 0, count = 0, total = 0; 
+    char oldc=' ', c;   
+
+    CreateSet(AllVovels, Sv);   
+    ComplementarySet(Sv, Sc);
+
+    printf("Слова, содержащие ровно 1 согласную:\n");
+    while (i != EOF) {      
+        i = getchar();     
+        c=i;               
+        if (Letter(c)) {                    
+            if (!Letter(oldc)) n = 0;      
+            else n++;                      
+            Word[n] = c;                
+            if(FindInSet(c, Sc)) {          
+                count++;                 
+            }
+        
+        }              
+        if (Letter(oldc) && !Letter(c)) {   
+            Word[++n]='\0';                 
+            if (count == 1) {              
+                total++;                    
+                printf("%s, ", Word);    
+            }
+            count = 0;                   
+        }
+        oldc = c;   
+    }
+
+    if (total == 0) printf("отсутствуют");  
+    printf("\n");
+    return 0;
+}
+daniel@daniel:~$ gcc 22.c Set.c -o 13lab.out
+daniel@daniel:~$ cat test1.txt 
+Dota 2 is a multiplayer online battle arena (MOBA) video
+game developed and published by Valve Corporation. The game 
+is a sequel to Defense of the Ancients (DotA), which was a 
+community-created mod for Blizzard Entertainment Warcraft III: Reign 
+of Chaos and its expansion pack, The Frozen Throne. Dota 2
+is played in matches between two teams of five players, 
+with each team occupying and defending their own separate 
+base on the map. Each of the ten players independently
+controls a powerful character, known as a "hero", who all
+have unique abilities and differing styles of play. During a 
+match, players collect experience points and items for their 
+heroes to successfully defeat the opposing team heroes in
+player versus player combat. A team wins by being the first 
+to destroy a large structure located in the opposing team 
+base, called the "Ancient".
+
+Development of Dota 2 began in 2009 when IceFrog, lead designer
+of the original Defense of the Ancients mod, was hired by Valve
+to create a modernized remake in the Source game engine. It was 
+officially released for Microsoft Windows, OS X, and Linux-based 
+personal computers via the digital distribution platform Steam in 
+July 2013, following a Windows-only public beta phase that began 
+two years prior. As the game is fully free-to-play with no heroes 
+needing to be bought or unlocked, revenue is made from microtransactions,
+specifically loot boxes, battle passes, and a monthly-based subscription
+system called Dota Plus, which all offer non-gameplay altering virtual 
+goods, such as cosmetic hero armor and weapon replacements, in return. 
+The game has also been updated with various other features since release,
+such as support for virtual reality (VR) and a full transition to the
+Source 2 engine in 2015.
+daniel@daniel:~$ ./13lab.out < test1.txt 
+Слова, содержащие ровно 1 согласную: 
+is is to of of is in of on of as of to in to in of in of of to in It OS X via in As is no to be or is as in as to in 
+daniel@daniel:~$ cat test2.txt 
+Queen are a British rock band that formed in London in 1970. Their classic line-up was Freddie Mercury
+(lead vocals and piano), Brian May (lead guitar and vocals), Roger Taylor (drums and vocals), 
+and John Deacon (bass guitar). Their earliest works were influenced by progressive rock, 
+hard rock and heavy metal, but the band gradually ventured into more conventional and radio-friendly 
+works by incorporating further styles, such as arena rock and pop rock, into their music.
+
+Before forming Queen, May and Taylor had played together in the band Smile. 
+Mercury, then known by his birth name, Farrokh Bulsara, was a fan of Smile and encouraged them 
+to experiment with more elaborate stage and recording techniques. 
+Mercury joined in 1970, suggested the name "Queen", and adopted his familiar stage name. 
+Deacon was recruited before the band recorded their eponymous debut album in 1973. 
+Queen first charted in the UK with their second album, Queen II, in 1974, 
+but it was the release of Sheer Heart Attack later that year and A Night at the Opera 
+in 1975 which brought them international success. The latter featured "Bohemian Rhapsody",
+which stayed at number one in the UK for nine weeks and also helped to popularise the music video.
+daniel@daniel:~$ ./13lab.out < test2.txt
+Слова, содержащие ровно 1 согласную: 
+are in in as in of to in in in UK in it of at in at one in UK to 
+daniel@daniel:~$ cat test3.txt
+Only words with more than single consonant letter.
+daniel@daniel:~$ ./13lab.out < test3.txt
+Слова, содержащие ровно 1 согласную:
+отсутствуют
+daniel@daniel:~$

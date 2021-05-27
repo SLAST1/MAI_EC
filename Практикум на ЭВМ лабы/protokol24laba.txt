@@ -1,0 +1,411 @@
+(py37) ➜  ~ cd LR24/  
+(py37) ➜  LR24 cat main.c
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
+
+#include"token.h"
+
+void readToToken();
+TNode *makeTreeMul();
+TNode *makeTreeSum();
+TNode *makeTreeBr();
+
+void printTree(TNode*, int);
+void printTree2(TNode*);
+
+void transform(TNode*);
+
+unsigned int glI;
+Token *arr;
+
+int main(){
+  Token newArray[70];
+  arr = newArray;
+  readToToken();
+
+  glI = 0;
+
+  TNode myTree = *makeTreeSum();
+
+  transform(&myTree);
+
+  printTree(&myTree, 0);
+  printf("\n");
+  printTree2(&myTree);
+  printf("\n");
+
+  return 0;
+  }
+
+// ============================================
+
+void transform(TNode *tree){
+    if(tree->left)
+        transform(tree->left);
+    if(tree->right)
+        transform(tree->right);
+
+  if(tree->token.type == DIV){
+    if(tree->left && tree->left->token.type == DIV){
+      // (a/b)/c  -->  a/(b*c)
+      TNode *a, *b, *c;
+      a = tree->left->left;
+      b = tree->left->right;
+      c = tree->right;
+
+      tree->right = tree->left;
+      tree->right->token.type = MUL;
+      
+      tree->right->right = c;
+      tree->right->left = b;
+      tree->left = a;
+
+            transform(tree->right);
+      }
+    if(tree->right && tree->right->token.type == DIV){
+      // a/(b/c)  -->  (a*c)/b
+      TNode *a, *b, *c;
+      a = tree->left;
+      b = tree->right->left;
+      c = tree->right->right;
+
+      tree->left = tree->right;
+      tree->left->token.type = MUL;
+      
+      tree->right = b;
+      tree->left->left = a;
+      tree->left->right = c;
+
+            transform(tree->left);
+      }
+    }
+
+    if(tree->token.type == MUL){
+        if(tree->left && tree->left->token.type == DIV){
+            // (a/b)*c  -->  (a*c)/b
+            TNode *b, *c;
+            b = tree->left->right;
+            c = tree->right;
+
+            tree->left->token.type = MUL;
+            tree->token.type = DIV;
+            
+            tree->left->right = c;
+            tree->right = b;
+            }
+        if(tree->right && tree->right->token.type == DIV){
+            // a*(b/c)  -->  (a*b)/c
+            TNode *a, *b, *c;
+            a = tree->left;
+            b = tree->right->left;
+            c = tree->right->right;
+
+            tree->token.type = DIV;
+            tree->left = tree->right;
+            tree->left->token.type = MUL;
+            
+            tree->right = c;
+            tree->left->left = a;
+            tree->left->right = b;
+            }
+        }
+  }
+
+void printTree(TNode *tree, int iter){
+
+  if(tree->right)
+    printTree(tree->right, iter+1);
+
+  for(int i=0; i<iter; i++)
+    printf("  ");
+  switch(tree->token.type){
+    case LET:
+      printf("%c", tree->token.letter);
+      break;
+    case NUM:
+      printf("%d", tree->token.number);
+      break;
+    case ADD:
+      printf("+");
+      break;
+    case SUB:
+      printf("-");
+      break;
+    case MUL:
+      printf("*");
+      break;
+    case DIV:
+      printf("/");
+      break;
+    default:
+      printf("?");
+      break;
+    }
+  printf("\n");
+
+  if(tree->left)
+    printTree(tree->left, iter+1);
+  }
+
+void printTree2(TNode *tree){
+  bool brackets1 = false;
+  bool brackets2 = false;
+
+  if(tree->token.type == MUL){
+    enum nodeType _type;
+    _type = tree->left->token.type;
+    if(_type == ADD || _type == SUB || _type == DIV)
+      brackets1 = true;
+    _type = tree->right->token.type;
+    if(_type == ADD || _type == SUB || _type == DIV)
+      brackets2 = true;
+    }
+    else if(tree->token.type == DIV){
+        enum nodeType _type = tree->left->token.type;
+        brackets1 = true;
+        if(_type == NUM || _type == LET)
+            brackets1 = false;
+        brackets2 = true;
+        _type = tree->right->token.type;
+        if(_type == NUM || _type == LET)
+            brackets2 = false;
+        }
+  
+  if(brackets1)
+    printf("(");
+  if(tree->left)
+    printTree2(tree->left);
+  if(brackets1)
+    printf(")");
+
+  switch(tree->token.type){
+    case LET:
+      printf("%c", tree->token.letter);
+      break;
+    case NUM:
+      printf("%d", tree->token.number);
+      break;
+    case ADD:
+      printf("+");
+      break;
+    case SUB:
+      printf("-");
+      break;
+    case MUL:
+      printf("*");
+      break;
+    case DIV:
+      printf("/");
+      break;
+    default:
+      printf("?");
+      break;
+    }
+
+  if(brackets2)
+    printf("(");
+  if(tree->right)
+    printTree2(tree->right);
+  if(brackets2)
+    printf(")");
+  }
+
+void readToToken(){
+  int index = 0;
+  int newInt = 0;
+  bool writingInt = false;
+  char C;
+
+  while(true){
+    scanf("%c", &C);
+
+    if(writingInt){
+      if(C>='0' && C<='9'){
+        newInt *= 10;
+        newInt += (C-'0');
+        continue;
+        }
+      else{
+        writingInt = false;
+        arr[index].type = NUM;
+        arr[index].number = newInt;
+        newInt = 0;
+        index++;
+        }
+      }
+
+    if(C==' ')
+      continue;
+    else if(C=='\n' || C==0){
+      arr[index].type = NUL;
+      break;
+      }
+    else if(C>='0' && C<='9'){
+      writingInt = true;
+      newInt *= 10;
+      newInt += (C-'0');
+      continue;
+      }
+    else if((C>='A' && C<='Z') || (C>='a' && C<='z')){
+      arr[index].type = LET;
+      arr[index].letter = C;
+      }
+    else if(C=='+')
+      arr[index].type = ADD;
+    else if(C=='-')
+      arr[index].type = SUB;
+    else if(C=='*')
+      arr[index].type = MUL;
+    else if(C=='/')
+      arr[index].type = DIV;
+    else if(C=='(')
+      arr[index].type = BRO;
+    else if(C==')')
+      arr[index].type = BRC;
+    else
+      return; // Error
+
+    index++;
+    }
+  }
+
+TNode *makeTreeBr(){
+  glI++;
+
+  TNode *toRet = makeTreeSum();
+
+  glI++;
+  return toRet;
+  }
+
+
+TNode *makeTreeSum(){
+  int mem = sizeof(TNode);
+  TNode *root = malloc(mem);
+
+  root->left = makeTreeMul();
+  if(!(arr[glI].type == ADD || arr[glI].type == SUB)){
+    if(arr[glI].type == BRC){
+      
+      }
+    root = root->left;
+    return root;
+    }
+
+  root->token = arr[glI];
+  glI++;
+  root->right = makeTreeMul();
+
+  while(arr[glI].type == ADD || arr[glI].type == SUB){
+    TNode *temp = malloc(mem);
+    temp->left = root;
+    temp->token = arr[glI];
+    glI++;
+    temp->right = makeTreeMul();
+    root = temp;
+    }
+
+  return root;
+  }
+
+TNode *makeTreeMul(){
+  int mem = sizeof(TNode);
+  TNode *root = malloc(mem);
+
+  if(arr[glI].type == BRO){
+    root->left = makeTreeBr();
+    glI--;
+    }
+        
+  if(!(arr[glI+1].type == MUL || arr[glI+1].type == DIV)){
+    if(arr[glI].type == BRC){
+      root = root->left;
+      glI++;
+      return root;
+      }
+    root->token = arr[glI];
+    glI++;
+    return root;
+    }
+
+  if(arr[glI].type != BRC){
+    root->left = malloc(mem);
+    root->left->token = arr[glI];
+    }
+
+  glI++;
+  root->token = arr[glI];
+  glI++;
+
+  if(arr[glI].type == BRO)
+    root->right = makeTreeBr();
+  else{
+    root->right = malloc(mem);
+    root->right->token = arr[glI];
+    glI++;
+    }
+
+  while(arr[glI].type == MUL || arr[glI].type == DIV){
+    TNode *temp = malloc(mem);
+    temp->left = root;
+    temp->token = arr[glI];
+    glI++;
+    if(arr[glI].type == BRO)
+      temp->right = makeTreeBr();
+    else{
+      temp->right = malloc(mem);
+      temp->right->token = arr[glI];
+      glI++;
+      }
+    root = temp;
+    }
+  
+  return root;
+  }
+(py37) ➜  LR24 cat token.h 
+#ifndef _TOKEN_H_
+#define _TOKEN_H_
+
+typedef struct token{
+  enum nodeType{NUL, NUM, LET, ADD, SUB, MUL, DIV, BRO, BRC} type;
+  char letter;
+  int number;
+  } Token;
+typedef struct TNode{
+  Token token;
+  struct TNode *left, *right;
+  } TNode;
+
+#endif
+(py37) ➜  LR24 make
+make: «math» не требует обновления.
+(py37) ➜  LR24 ./math
+1/2/3/4
+    4
+  *
+      3
+    *
+      2
+/
+  1
+
+1/(2*3*4)
+(py37) ➜  LR24 ./math in
+(a/(b*c)) / ((d*e)/(f/h))
+      h
+    *
+        e
+      *
+        d
+  *
+      c
+    *
+      b
+/
+    f
+  *
+    a
+
+(a*f)/(b*c*d*e*h)
+(py37) ➜  LR24 

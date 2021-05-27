@@ -1,0 +1,95 @@
+daniel@daniel:~$ cat head.txt
+-------------------------------------------------------------
+| Лабораторная работа №14                                   |
+  Вложенные циклы с параметрами. Обход и линезация матриц.
+  Выполнил: студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич                               |
+------------------------------------------------------------- 
+daniel@daniel:~$ cat 22.c
+//lab14
+//variant 22
+// ----------
+// 1 12 11 10
+// 2 13 16 9
+// 3 14 15 8
+// 4 5  6  7
+// ----------
+#include <stdio.h>
+int size;
+
+void printMatrix(int[9][9]);
+
+int main(){
+    int k = 0;
+    printf("Введите размер матрицы: ");
+    scanf("%d", &size);
+    int array[9][9];
+
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++)
+            array[i][j] = (i+1)*10 + j+1;
+    }
+    
+    printf("Матрица:\n");
+    printMatrix(array);
+    printf("Результат:\n");
+
+    for(int i = 0; i < size; i++){
+        for(int t = k/4; t < (size - k/4); t++)
+            printf("%d ", array[t][k/4]);
+        k++;
+        for(int t = k/4+1; t < (size - k/4); t++)
+            printf("%d ", array[size-(k/4+1)][t]);
+        k++;
+        for(int t = size-k/4-2; t >= k/4; t--)
+            printf("%d ", array[t][size-(k/4+1)]);
+        k++;
+        for(int t = size-(k/4+2); t >= k/4+1; t--)
+            printf("%d ", array[k/4][t]);
+        k++;
+    }
+    printf("\n");
+}
+
+void printMatrix(int matrix[9][9]){
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++)
+            printf("%2d ", matrix[i][j]);
+        printf("\n");
+    }   
+}
+daniel@daniel:~$ gcc 22.c -o 14laba.out
+daniel@daniel:~$ ./14laba.out 
+Введите размер матрицы: 1
+Матрица:
+11 
+Результат:
+11 
+daniel@daniel:~$ ./14laba.out 
+Введите размер матрицы: 3
+Матрица:
+11 12 13 
+21 22 23 
+31 32 33 
+Результат:
+11 21 31 32 33 23 13 12 22 
+daniel@daniel:~$ ./14laba.out
+Введите размер матрицы: 4
+Матрица:
+11 12 13 14 
+21 22 23 24 
+31 32 33 34 
+41 42 43 44 
+Результат:
+11 21 31 41 42 43 44 34 24 14 13 12 22 32 33 23 
+daniel@daniel:~$ ./14laba.out 
+Введите размер матрицы: 5
+Матрица:
+11 12 13 14 15 
+21 22 23 24 25 
+31 32 33 34 35 
+41 42 43 44 45 
+51 52 53 54 55 
+Результат:
+11 21 31 41 51 52 53 54 55 45 35 25 15 14 13 12 22 32 42 43 44 34 24 23 33 
+daniel@daniel:~$ 

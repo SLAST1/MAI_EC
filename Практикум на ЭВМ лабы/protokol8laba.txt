@@ -1,0 +1,35 @@
+daniel@daniel:~$ cat head.txt
+-------------------------------------------------------------------------------
+| Лабораторная работа №8          |
+  Системы программирования на языке Си
+  Выполнил:  студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич     |
+--------------------------------------------------------------------------------
+daniel@daniel:~$ cat main.c
+#include <stdio.h>
+int main(){
+    int a=5, b=4;
+    printf("%d\n", a+b);
+    printf("%d\n", a*b)
+    return 0;
+}
+daniel@daniel:~$ gcc -g -o run.out main.c
+main.c: In function 'main':
+main.c: 7:2: error: expected ';' before 'return'
+    return 0;
+    ^
+daniel@daniel:~$
+
+daniel@daniel:~$ cat main.c
+#include <stdio.h>
+int main(){
+    int a=5, b=4;
+    printf("%d\n", a+b);
+    printf("%d\n", a*b);
+    return 0;
+}
+daniel@daniel:~$ gcc -g -o run.out main.c
+daniel@daniel:~$ ./run.out
+9
+20
+daniel@daniel:~$

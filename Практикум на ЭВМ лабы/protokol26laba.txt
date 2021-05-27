@@ -1,0 +1,121 @@
+(py37) ➜  ~ cat main.c 
+#include <stdio.h>
+#include "queue.h"
+
+void sdvig(queue *q,int d){
+    for(int i=0;i<d;i++){
+      enqueue(q,dequeue(q));
+    }
+}
+
+void paste(queue *q,int k,int i,int f){//кол-во элементов, нужная позиция в очереди, значение
+    sdvig(q,k-i-2);
+    int pr;
+    int s=0;
+    if(f>=peek(q)){
+      pr=dequeue(q);
+      enqueue(q,pr);
+      while(!((f>=pr)&&(f<peek(q)))){
+        enqueue(q,dequeue(q));
+        s++;
+      }
+    }
+    else{
+    i++;
+    }
+    enqueue(q,f);
+    sdvig(q,i-s);
+}
+
+int main(){
+    queue a;
+    creat(&a);
+    printf("Введите количество элементов(не больше 100)\n");
+    int k;
+    scanf("%d",&k);
+    printf("Вводите элементы\n");
+    for(int i=0;i<k;i++){
+      int j;
+      scanf("%d",&j);
+      enqueue(&a,j);
+    }
+    printq(&a);
+    int f=dequeue(&a);
+    enqueue(&a,f);
+    for(int i=0;i<k-1;i++){
+      if(peek(&a)<f){
+        paste(&a,k,i,dequeue(&a));
+      }
+      else{
+        f=dequeue(&a);
+        enqueue(&a,f);
+      }
+    }
+  printq(&a);
+  return 0;
+}
+(py37) ➜  ~ cat queue.h
+#ifndef _QUEUE_
+#define _QUEUE_
+
+typedef struct
+{
+  int node[100];
+  int start;
+  int end;
+  int count;
+} queue;
+
+int count(queue *q);
+void creat(queue *q);
+int empty(queue *q);
+void enqueue(queue *q,int key);
+int peek(queue *q);
+int dequeue(queue *q);
+void printq(queue *q);
+#endif
+(py37) ➜  ~
+(py37) ➜  ~ ./laba26 
+Введите количество элементов(не больше 100)
+10
+Вводите элементы
+1
+2
+7
+4
+9
+4
+7
+3
+6
+3
+1 2 7 4 9 4 7 3 6 3 
+1 2 3 3 4 4 6 7 7 9 
+(py37) ➜  ~ ./laba26 
+Введите количество элементов(не больше 100)
+5
+Вводите элементы
+1
+2
+3
+2
+5
+1 2 3 2 5 
+1 2 2 3 5 
+(py37) ➜  ~ ./laba26 
+Введите количество элементов(не больше 100)
+10
+Вводите элементы
+8
+34
+3
+7
+2
+56
+2
+34536
+7
+3
+8 34 3 7 2 56 2 34536 7 3 
+2 2 3 3 7 7 8 34 56 34536 
+(py37) ➜  ~

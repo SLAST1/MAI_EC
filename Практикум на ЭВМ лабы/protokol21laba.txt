@@ -1,0 +1,119 @@
+(py37) ➜  ~ cat script.sh 
+#!/bin/bash
+
+usage(){
+    echo "usage: ${0##*/} [dir] [size]"
+    echo -e "\t dir | in what directory check"
+    echo -e "\t size | size of file"
+}
+
+error() {
+    echo -e "error occurred: $1"
+    usage
+}
+
+if [ "$1" = "--help" ] ; then
+    usage
+    exit 1
+fi
+
+folder="$1"
+size="$2"
+
+if [ -z "$size" ] ; then 
+    error "bad size format"
+    exit 1
+fi
+
+if [ $# != 2 ] ; then
+    echo "Неверное количество параметров!"
+    usage
+    exit 1
+fi
+
+for filename in $(find "$folder" -size -"$size" | awk -F '/' '{print $NF;}')
+do
+    echo "Исходный файл: $filename"
+    name="${filename%.*}"
+    echo "Название файла: $name"
+    ext=${filename#*.}
+    echo "Расширение: $ext"
+    newext=${filename:0:1}
+    echo "Новое расширение: $newext"
+    newfilename="$name.$newext"
+    echo "Новый файл: $newfilename"
+    echo ""
+    mv $folder/$filename $folder/$newfilename
+done
+(py37) ➜  ~ chmod +x ./script.sh 
+(py37) ➜  ~ ./script.sh filesfortest 5M
+Исходный файл: mokriy_kater.c
+Название файла: mokriy_kater
+Расширение: c
+Новое расширение: m
+Новый файл: mokriy_kater.m
+
+Исходный файл: hruck.jpg
+Название файла: hruck
+Расширение: jpg
+Новое расширение: h
+Новый файл: hruck.h
+
+Исходный файл: razukrashka.py
+Название файла: razukrashka
+Расширение: py
+Новое расширение: r
+Новый файл: razukrashka.r
+
+Исходный файл: mein_kampf_hitler.pdf
+Название файла: mein_kampf_hitler
+Расширение: pdf
+Новое расширение: m
+Новый файл: mein_kampf_hitler.m
+
+Исходный файл: shkafchik_Grishki.h
+Название файла: shkafchik_Grishki
+Расширение: h
+Новое расширение: s
+Новый файл: shkafchik_Grishki.s
+
+Исходный файл: ya_bolshe_ne_pridumal_nazvaniy.cpp
+Название файла: ya_bolshe_ne_pridumal_nazvaniy
+Расширение: cpp
+Новое расширение: y
+Новый файл: ya_bolshe_ne_pridumal_nazvaniy.y
+
+(py37) ➜  ~ ./script.sh filesfortest 100k
+Исходный файл: mokriy_kater.c
+Название файла: mokriy_kater
+Расширение: c
+Новое расширение: m
+Новый файл: mokriy_kater.m
+
+Исходный файл: razukrashka.py
+Название файла: razukrashka
+Расширение: py
+Новое расширение: r
+Новый файл: razukrashka.r
+
+Исходный файл: ya_bolshe_ne_pridumal_nazvaniy.cpp
+Название файла: ya_bolshe_ne_pridumal_nazvaniy
+Расширение: cpp
+Новое расширение: y
+Новый файл: ya_bolshe_ne_pridumal_nazvaniy.y
+
+(py37) ➜  ~ ./z10.sh testfiles     
+error occurred: bad size format
+usage: z10.sh [dir] [size]
+     dir | in what directory check
+     size | size of file
+(py37) ➜  ~ ./z10.sh testfiles 123k sadasnd,
+Неверное количество параметров!
+usage: z10.sh [dir] [size]
+     dir | in what directory check
+     size | size of file
+(py37) ➜  ~ ./z10.sh --help                 
+usage: z10.sh [dir] [size]
+     dir | in what directory check
+     size | size of file
+(py37) ➜  ~

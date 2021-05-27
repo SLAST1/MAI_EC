@@ -1,0 +1,84 @@
+daniel@daniel:~$ cat head.txt
+-------------------------------------------------------------------------------
+| Лабораторная работа №5          |
+  Программирование Машин Тьюринга
+  Выполнил:  студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич     |
+-------------------------------------------------------------------------------- 
+daniel@daniel:~$ cd 'Turun Nam'
+daniel@daniel:~$ Turun Nam ls   
+nam  5laba.tu  test.txt  turun
+daniel@daniel:~$ Turun Nam ./turun 5laba.tu test.txt
+     04,92,b,>,130994
+     04,12,b,>,120950
+     04,12, ,b,910950
+     04,91,b,>,130350
+     95,13,b,>,139350
+     52,13,~,>,131051
+     52,13, ,<,141203
+     52,14,a,a,109306
+     52,14,b,<,141206
+     53,14, ,>,151110
+     05,15,b,>,151209
+     05,15, , ,159209
+     05,~,>,05
+ aaa                                                                          =>
+ aaa~                                                                         =>
+  aa~                                                                         =>
+  aa~a                                                                        =>
+ aaa~a                                                                        =>
+ a a~a                                                                        =>
+ a a~aa                                                                       =>
+ aaa~aa                                                                       =>
+ aa ~aa                                                                       =>
+ aa ~aaa                                                                      =>
+ aaa~aaa                                                                      =>
+ aaa aaa                                                                      =>
+ aaa aab                                                                      =>
+ aaa aabb                                                                     =>
+ aaa aabb                                                                     =>
+ aaa abbb                                                                     =>
+ aaa abbbb                                                                    =>
+ aaa abbbb                                                                    =>
+ aaa bbbbb                                                                    =>
+ aaa bbbbbb                                                                   =>
+ aaa bbbbbb                                                                   
+Machine stopped successfully
+ bbb                                                                          =>
+ bbb~                                                                         =>
+  bb~                                                                         =>
+  bb~b                                                                        =>
+ bbb~b                                                                        =>
+ b b~b                                                                        =>
+ b b~bb                                                                       =>
+ bbb~bb                                                                       =>
+ bb ~bb                                                                       =>
+ bb ~bbb                                                                      =>
+ bbb~bbb                                                                      =>
+ bbb bbb                                                                      =>
+ bbb bbbb                                                                     =>
+ bbb bbbb                                                                     
+Machine stopped successfully
+ abab                                                                         =>
+ abab~                                                                        =>
+  bab~                                                                        =>
+  bab~a                                                                       =>
+ abab~a                                                                       =>
+ a ab~a                                                                       =>
+ a ab~ab                                                                      =>
+ abab~ab                                                                      =>
+ ab b~ab                                                                      =>
+ ab b~aba                                                                     =>
+ abab~aba                                                                     =>
+ aba ~aba                                                                     =>
+ aba ~abab                                                                    =>
+ abab~abab                                                                    =>
+ abab abab                                                                    =>
+ abab abbb                                                                    =>
+ abab abbbb                                                                   =>
+ abab abbbb                                                                   =>
+ abab bbbbb                                                                   =>
+ abab bbbbbb                                                                  =>
+ abab bbbbbb                                                                  
+Machine stopped successfully
+daniel@daniel:~$

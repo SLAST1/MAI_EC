@@ -1,0 +1,53 @@
+daniel@daniel:~$ cat head.txt
+-------------------------------------------------------------------------------
+| Лабораторная работа №11         |
+  Обработка последовательности литер входного текстового файла
+  Выполнил:  студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич     |
+-------------------------------------------------------------------------------- 
+daniel@daniel:~$ cat main.c 
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isCharInWord(char ch){
+    return (ch != ' ' && ch != ',' && ch != '\t' && ch != EOF && ch != '\n');
+}
+
+
+int main(){
+    freopen("in.txt", "r", stdin);
+
+    char buf;
+    int ans = 0, cnt = 0;
+
+    while(scanf("%c", &buf) > 0){
+        if(isCharInWord(buf)){
+            cnt++;
+        } else{
+            if(cnt >= 3) ans++;
+            cnt = 0;
+            if(buf == '\n'){
+                printf("%d\n", ans);
+                ans = 0;
+            }
+        }
+    }
+    if(buf != '\n')
+        printf("%d", ans);
+}
+daniel@daniel:~$ gcc -Wall -pedantic -std=c99 main.c 
+daniel@daniel:~$ cat - > in.txt
+1 2 2312 awe ased z aw qwe3 e
+123a e eaw aweq
+aweawe 12312ase
+q23ehfjwbelbjsdf
+12 12 12
+sad
+daniel@daniel:~$ ./a.out 
+4
+3
+2
+1
+0
+1
+daniel@daniel:~$

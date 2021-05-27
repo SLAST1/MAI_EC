@@ -1,0 +1,295 @@
+(py37) ➜  ~ cd programms
+(py37) ➜  programms ls
+ 01.c   01.out   8march.c   8march.out
+(py37) ➜  programms touch file1.txt file2.txt file3.txt file4.txt file5.txt
+(py37) ➜  programms ls
+ 01.c   01.out   8march.c   8march.out   file1.txt   file2.txt   file3.txt   file4.txt   file5.txt
+(py37) ➜  programms cat file1.txt
+Зимний день унылый, хмурый...
+Рассвело и вновь темнеет.
+Зимний лес в объятьях тишины,
+Задремал укутав ветки снегом.
+Будет спать спокойно до весны,
+Он теперь под серебристым небом...
+(py37) ➜  programms cat file2.txt
+Тигр, Тигр, жгучий страх,
+Ты горишь в ночных лесах.
+Чей бессмертный взор, любя,
+Создал страшного тебя?
+
+В небесах иль средь зыбей
+Вспыхнул блеск твоих очей?
+Как дерзал он так парить?
+Кто посмел огонь схватить?
+
+Кто скрутил и для чего
+Нервы сердца твоего?
+Чьею страшною рукой
+Ты был выкован — такой?
+(py37) ➜  programms cat file3.txt
+Анекдот про Штирлица:
+
+Штирлиц заселился в отель:
+Решил проветрить помещение.
+Открыл окно - дуло.
+Штрилиц закрыл окно - дуло исчезло.
+(py37) ➜  programms cat file4.txt
+Зимний день унылый, хмурый...
+Ты горишь в ночных лесах.
+Зимний лес в объятьях тишины,
+Решил проветрить помещение.
+Открыл окно - дуло.
+Он теперь под серебристым небом...                                             
+(py37) ➜  programms cat file5.txt
+computer
+mouse
+LAPTOP
+data
+RedHat
+laptop
+debian
+laptopP
+(py37) ➜  programms df
+Файл.система   1K-блоков Использовано  Доступно Использовано% Cмонтировано в
+udev             4007248            0   4007248            0% /dev
+tmpfs             807968         1468    806500            1% /run
+/dev/sda6       78218924     25623912  48578628           35% /
+tmpfs            4039824        83820   3956004            3% /dev/shm
+tmpfs               5120            4      5116            1% /run/lock
+tmpfs            4039824            0   4039824            0% /sys/fs/cgroup
+/dev/sda7       67674480     19666084  44527668           31% /home
+/dev/sda4      209715196     57266092 152449104           28% /data
+/dev/sda3          98304        31532     66772           33% /boot/efi
+tmpfs             807964           40    807924            1% /run/user/1000
+/dev/sdb1       32751952         3920  32748032            1% /media/daniel/DISK_IMG
+(py37) ➜  programms df -h 
+Файл.система   Размер Использовано  Дост Использовано% Cмонтировано в
+udev             3,9G            0  3,9G            0% /dev
+tmpfs            790M         1,5M  788M            1% /run
+/dev/sda6         75G          25G   47G           35% /
+tmpfs            3,9G          79M  3,8G            2% /dev/shm
+tmpfs            5,0M         4,0K  5,0M            1% /run/lock
+tmpfs            3,9G            0  3,9G            0% /sys/fs/cgroup
+/dev/sda7         65G          19G   43G           31% /home
+/dev/sda4        200G          55G  146G           28% /data
+/dev/sda3         96M          31M   66M           33% /boot/efi
+tmpfs            790M          48K  789M            1% /run/user/1000
+/dev/sdb1         32G         3,9M   32G            1% /media/daniel/DISK_IMG
+(py37) ➜  programms df -a
+Файл.система   1K-блоков Использовано  Доступно Использовано% Cмонтировано в
+sysfs                  0            0         0             - /sys
+proc                   0            0         0             - /proc
+udev             4007248            0   4007248            0% /dev
+devpts                 0            0         0             - /dev/pts
+tmpfs             807968         1468    806500            1% /run
+/dev/sda6       78218924     25623940  48578600           35% /
+securityfs             0            0         0             - /sys/kernel/security
+tmpfs            4039824        79936   3959888            2% /dev/shm
+tmpfs               5120            4      5116            1% /run/lock
+tmpfs            4039824            0   4039824            0% /sys/fs/cgroup
+cgroup                 0            0         0             - /sys/fs/cgroup/unified
+cgroup                 0            0         0             - /sys/fs/cgroup/systemd
+pstore                 0            0         0             - /sys/fs/pstore
+efivarfs               0            0         0             - /sys/firmware/efi/efivars
+cgroup                 0            0         0             - /sys/fs/cgroup/net_cls,net_prio
+cgroup                 0            0         0             - /sys/fs/cgroup/cpu,cpuacct
+cgroup                 0            0         0             - /sys/fs/cgroup/pids
+cgroup                 0            0         0             - /sys/fs/cgroup/blkio
+cgroup                 0            0         0             - /sys/fs/cgroup/hugetlb
+cgroup                 0            0         0             - /sys/fs/cgroup/rdma
+cgroup                 0            0         0             - /sys/fs/cgroup/memory
+cgroup                 0            0         0             - /sys/fs/cgroup/freezer
+cgroup                 0            0         0             - /sys/fs/cgroup/devices
+cgroup                 0            0         0             - /sys/fs/cgroup/cpuset
+cgroup                 0            0         0             - /sys/fs/cgroup/perf_event
+systemd-1              -            -         -             - /proc/sys/fs/binfmt_misc
+mqueue                 0            0         0             - /dev/mqueue
+debugfs                0            0         0             - /sys/kernel/debug
+hugetlbfs              0            0         0             - /dev/hugepages
+configfs               0            0         0             - /sys/kernel/config
+fusectl                0            0         0             - /sys/fs/fuse/connections
+/dev/sda7       67674480     19666156  44527596           31% /home
+/dev/sda4      209715196     57266092 152449104           28% /data
+/dev/sda3          98304        31532     66772           33% /boot/efi
+tmpfs             807964           48    807916            1% /run/user/1000
+gvfsd-fuse             0            0         0             - /run/user/1000/gvfs
+/dev/sdb1       32751952         3920  32748032            1% /media/daniel/DISK_IMG
+binfmt_misc            0            0         0             - /proc/sys/fs/binfmt_misc
+(py37) ➜  programms wc file1.txt
+  6  27 326 file1.txt
+(py37) ➜  programms wc file5.txt
+ 8  8 55 file5.txt
+(py37) ➜  programms diff file1.txt file3.txt
+1,6c1,6
+< Зимний день унылый, хмурый...
+< Рассвело и вновь темнеет.
+< Зимний лес в объятьях тишины,
+< Задремал укутав ветки снегом.
+< Будет спать спокойно до весны,
+< Он теперь под серебристым небом...
+---
+> Анекдот про Штирлица:
+> 
+> Штирлиц заселился в отель:
+> Решил проветрить помещение.
+> Открыл окно - дуло.
+> Штрилиц закрыл окно - дуло исчезло.
+(py37) ➜  programms diff -s file1.txt file4.txt
+2c2
+< Рассвело и вновь темнеет.
+---
+> Ты горишь в ночных лесах.
+4,5c4,5
+< Задремал укутав ветки снегом.
+< Будет спать спокойно до весны,
+---
+> Решил проветрить помещение.
+> Открыл окно - дуло.
+(py37) ➜  programms diff -c file1.txt file4.txt
+*** file1.txt   2020-03-16 10:05:56.215985893 +0300
+--- file4.txt   2020-03-16 10:06:02.072033299 +0300
+***************
+*** 1,6 ****
+  Зимний день унылый, хмурый...
+! Рассвело и вновь темнеет.
+  Зимний лес в объятьях тишины,
+! Задремал укутав ветки снегом.
+! Будет спать спокойно до весны,
+  Он теперь под серебристым небом...
+--- 1,6 ----
+  Зимний день унылый, хмурый...
+! Ты горишь в ночных лесах.
+  Зимний лес в объятьях тишины,
+! Решил проветрить помещение.
+! Открыл окно - дуло.
+  Он теперь под серебристым небом...
+(py37) ➜  programms cmp file1.txt file2.txt
+file1.txt file2.txt различаются: байт 2, строка 1
+(py37) ➜  programms grep 'лес' file1.txt
+Зимний лес в объятьях тишины,
+(py37) ➜  programms grep 'лес' file2.txt
+Ты горишь в ночных лесах.
+Вспыхнул блеск твоих очей?
+(py37) ➜  programms grep 'лес' file5.txt
+(py37) ➜  programms sort file5.txt
+computer
+data
+debian
+laptop
+laptop
+LAPTOP
+mouse
+RedHat
+(py37) ➜  programms sort -u file5.txt
+computer
+data
+debian
+laptop
+LAPTOP
+mouse
+RedHat
+(py37) ➜  programms file file1.txt
+file1.txt: UTF-8 Unicode text
+(py37) ➜  programms file file5.txt
+file5.txt: ASCII text
+(py37) ➜  programms file -f file1.txt
+Зимний день унылый, хмурый...:      cannot open `Зимний день унылый, хмурый...' (No such file or directory)
+Рассвело и вновь темнеет.:          cannot open `Рассвело и вновь темнеет.' (No such file or directory)
+Зимний лес в объятьях тишины,:      cannot open `Зимний лес в объятьях тишины,' (No such file or directory)
+Задремал укутав ветки снегом.:      cannot open `Задремал укутав ветки снегом.' (No such file or directory)
+Будет спать спокойно до весны,:     cannot open `Будет спать спокойно до весны,' (No such file or directory)
+Он теперь под серебристым небом...: cannot open `Он теперь под серебристым небом...' (No such file or directory)
+(py37) ➜  programms cd   
+(py37) ➜  ~ find programms -type f -name file1.txt
+programms/file1.txt
+(py37) ➜  ~ 
+(py37) ➜  ~ cd programms
+(py37) ➜  programms head file2.txt
+Тигр, Тигр, жгучий страх,
+Ты горишь в ночных лесах.
+Чей бессмертный взор, любя,
+Создал страшного тебя?
+
+В небесах иль средь зыбей
+Вспыхнул блеск твоих очей?
+Как дерзал он так парить?
+Кто посмел огонь схватить?
+
+(py37) ➜  programms tail -n2 file3.txt
+Открыл окно - дуло.
+Штрилиц закрыл окно - дуло исчезло.
+(py37) ➜  programms sum file1.txt
+65130     1
+(py37) ➜  programms sum file2.txt
+56199     1
+(py37) ➜  programms cut -b1 file5.txt
+c
+m
+L
+d
+R
+l
+d
+l
+(py37) ➜  programms cut -b3 file5.txt
+m
+u
+P
+t
+d
+p
+b
+p
+(py37) ➜  programms tar -c -f arch.tar file2.txt
+(py37) ➜  programms ls
+01.c  01.out  8march.c  8march.out  arch.tar  file1.txt  file2.txt  file3.txt  file4.txt  file5.txt
+(py37) ➜  programms tar -tf arch.tar          
+file2.txt
+(py37) ➜  programms cd
+(py37) ➜  ~ du
+1824    ./.PyCharmCE2019.2/config/plugins/BashSupport/lib
+1828    ./.PyCharmCE2019.2/config/plugins/BashSupport
+1524    ./.PyCharmCE2019.2/config/plugins/markdown/lib
+1528    ./.PyCharmCE2019.2/config/plugins/markdown
+256 ./.PyCharmCE2019.2/config/plugins/CSV Plugin/lib
+260 ./.PyCharmCE2019.2/config/plugins/CSV Plugin
+1752    ./.PyCharmCE2019.2/config/plugins/ideolog/lib
+1756    ./.PyCharmCE2019.2/config/plugins/ideolog
+7712    ./.PyCharmCE2019.2/config/plugins
+8   ./.PyCharmCE2019.2/config/codestyles
+56  ./.PyCharmCE2019.2/config/options
+^C
+(py37) ➜  ~ du -ha
+4,0K    ./.bash_history
+1,8M    ./.PyCharmCE2019.2/config/plugins/BashSupport/lib/bashsupport-1.7.12.192.jar
+4,0K    ./.PyCharmCE2019.2/config/plugins/BashSupport/lib/searchableOptions-1.7.12.192.jar
+1,8M    ./.PyCharmCE2019.2/config/plugins/BashSupport/lib
+1,8M    ./.PyCharmCE2019.2/config/plugins/BashSupport
+2,3M    ./.PyCharmCE2019.2/config/plugins/availables.xml
+928K    ./.PyCharmCE2019.2/config/plugins/markdown/lib/markdown.jar
+44K ./.PyCharmCE2019.2/config/plugins/markdown/lib/resources_en.jar
+148K    ./.PyCharmCE2019.2/config/plugins/markdown/lib/owasp-java-html-sanitizer.jar
+400K    ./.PyCharmCE2019.2/config/plugins/markdown/lib/markdown-0.1.31.jar
+1,5M    ./.PyCharmCE2019.2/config/plugins/markdown/lib
+1,5M    ./.PyCharmCE2019.2/config/plugins/markdown
+248K    ./.PyCharmCE2019.2/config/plugins/CSV Plugin/lib/intellij-csv-validator-2.6.2.jar
+4,0K    ./.PyCharmCE2019.2/config/plugins/CSV Plugin/lib/searchableOptions-2.6.2.jar
+256K    ./.PyCharmCE2019.2/config/plugins/CSV Plugin/lib
+(py37) ➜  programms ls
+01.c    8march.c    arch.tar   file2.txt  file4.txt
+01.out  8march.out  file1.txt  file3.txt  file5.txt
+(py37) ➜  programms echo "f1.txt f2.txt" | xargs touch
+(py37) ➜  programms ls
+01.c      8march.out  f2.txt     file3.txt
+01.out    arch.tar    file1.txt  file4.txt
+8march.c  f1.txt      file2.txt  file5.txt
+(py37) ➜  programms split -l2 file1.txt
+(py37) ➜  programms ls
+01.c  01.out  8march.c  8march.out  arch.tar  f1.txt  f2.txt  file1.txt  file2.txt  file3.txt  file4.txt  file5.txt  xaa  xab  xac
+(py37) ➜  programms paste -s file5.txt
+computer    mouse   LAPTOP  data    RedHat  laptop  debian  laptop
+(py37) ➜  programms dd if=file1.txt of=file2.txt   
+0+1 записей получено
+0+1 записей отправлено
+326 bytes copied, 0,000763536 s, 427 kB/s
+(py37) ➜  programms 

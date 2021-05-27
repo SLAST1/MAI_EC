@@ -1,0 +1,40 @@
+198022@client03:~$ gnuplot
+
+	G N U P L O T
+	Version 5.0 patchlevel 5    last modified 2016-10-02
+
+	Copyright (C) 1986-1993, 1998, 2004, 2007-2016
+	Thomas Williams, Colin Kelley and many others
+
+	gnuplot home:     http://www.gnuplot.info
+	faq, bugs, etc:   type "help FAQ"
+	immediate help:   type "help"  (plot window: hit 'h')
+
+Terminal type set to 'qt'
+gnuplot> splot
+              ^
+         function to plot expected
+
+gnuplot> splot sqrt(x*x+y*y)+5*cos(sqrt(x*x+y*y))
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:23:18: not a number
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:23:18: Expected a string.
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:815:10: not a number
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:815:24: Using Pango syntax for the font: style property is deprecated; please use CSS syntax
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1953:14: not a number
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:1953:14: Expected a string.
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: nautilus.css:50:71: Using one color stop with linear-gradient() is deprecated.
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: nautilus.css:51:71: Using one color stop with linear-gradient() is deprecated.
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-lubuntu.css:252:14: not a number
+
+(gnuplot_qt:2286): Gtk-WARNING **: Theme parsing error: gtk-lubuntu.css:252:14: Expected a string.
+
+Warning: slow font initializationgnuplot> qt_processTermEvent received a GE_fontprops event. This should not have happened

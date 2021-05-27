@@ -1,0 +1,148 @@
+daniel@daniel:~$ cat head.txt
+-------------------------------------------------------------------------------
+| Лабораторная работа №10         |
+  Составление простейшей программы на языке Си
+  Выполнил:  студент группы М8о-101Б-19
+| Пивницкий Даниэль Сергеевич     |
+-------------------------------------------------------------------------------- 
+daniel@daniel:~$ cat main.c
+#include <stdio.h>
+
+void bugaga(){
+    puts("test\n");
+}
+
+int main(){
+    int a = 0, b = 1;
+    b++;
+    a++;
+    a--;
+    bugaga();
+    int c = b / a;
+    printf("%d\n", c);
+}
+^C
+daniel@daniel:~$ gcc -std=c99 -g main.c 
+daniel@daniel:~$ ./a.out 
+test
+
+Исключение в операции с плавающей точкой (стек памяти сброшен на диск)
+daniel@daniel:~$ gdb a.out 
+GNU gdb (GDB) 8.3.1
+Copyright (C) 2019 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...
+(gdb) help
+List of classes of commands:
+
+aliases -- Aliases of other commands
+breakpoints -- Making program stop at certain points
+data -- Examining data
+files -- Specifying and examining files
+internals -- Maintenance commands
+obscure -- Obscure features
+running -- Running the program
+stack -- Examining the stack
+status -- Status inquiries
+support -- Support facilities
+tracepoints -- Tracing of program execution without stopping the program
+user-defined -- User-defined commands
+
+Type "help" followed by a class name for a list of commands in that class.
+Type "help all" for the list of all commands.
+Type "help" followed by command name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+(gdb) help stack
+Examining the stack.
+The stack is made up of stack frames.  Gdb assigns numbers to stack frames
+counting from zero for the innermost (currently executing) frame.
+
+At any time gdb identifies one frame as the "selected" frame.
+Variable lookups are done with respect to the selected frame.
+When the program being debugged stops, gdb selects the innermost frame.
+The commands below can be used to select other frames by number or address.
+
+List of commands:
+
+backtrace -- Print backtrace of all stack frames
+bt -- Print backtrace of all stack frames
+down -- Select and print stack frame called by this one
+faas -- Apply a command to all frames (ignoring errors and empty output)
+frame -- Select and print a stack frame
+frame address -- Select and print a stack frame by stack address
+frame apply -- Apply a command to a number of frames
+frame apply all -- Apply a command to all frames
+frame apply level -- Apply a command to a list of frames
+frame function -- Select and print a stack frame by function name
+frame level -- Select and print a stack frame by level
+frame view -- View a stack frame that might be outside the current backtrace
+return -- Make selected stack frame return to its caller
+select-frame -- Select a stack frame without printing anything
+select-frame address -- Select a stack frame by stack address
+select-frame function -- Select a stack frame by function name
+select-frame level -- Select a stack frame by level
+select-frame view -- Select a stack frame that might be outside the current backtrace
+up -- Select and print stack frame that called this one
+
+Type "help" followed by command name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+(gdb) b 12
+Breakpoint 1 at 0x117e: file main.c, line 12.
+(gdb) b 13
+Breakpoint 2 at 0x1188: file main.c, line 13.
+(gdb) r
+Starting program: /home/daniel/university/labs/protokol10laba/a.out 
+
+Breakpoint 1, main () at main.c:12
+12          bugaga();
+(gdb) s
+bugaga () at main.c:4
+4           puts("test\n");
+(gdb) n
+test
+
+5       }
+(gdb) 
+
+Breakpoint 2, main () at main.c:13
+13          int c = b / a;
+(gdb) p c
+$1 = 0
+(gdb) p a
+$2 = 0
+(gdb) p b
+$3 = 2
+(gdb) set var a = 1
+(gdb) p a
+$4 = 1
+(gdb) l
+8           int a = 0, b = 1;
+9           b++;
+10          a++;
+11          a--;
+12          bugaga();
+13          int c = b / a;
+14          printf("%d\n", c);
+15      }
+(gdb) bt
+#0  main () at main.c:13
+(gdb) c
+Continuing.
+2
+[Inferior 1 (process 11622) exited normally]
+(gdb) q
+daniel@daniel:~$

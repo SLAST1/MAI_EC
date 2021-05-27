@@ -1,0 +1,273 @@
+198022@client03:~$ cat head.txt
+-------------------------------------------------------------------------------
+|	Лабораторная работа №1-2		|
+|	Утилиты OS Unix				|
+|	Выполнил:  студент группы М8о-101Б-19	|
+|	Пивницкий Даниэль Сергеевич		|
+--------------------------------------------------------------------------------198022@client03:~$ hostname
+client03
+198022@client03:~$ uname -m
+i686
+198022@client03:~$ uname -r
+4.10.0-19-generic
+198022@client03:~$ lsusb -tv
+^[[A/:  Bus 05.Port 1: Dev 1, Class=root_hub, Driver=uhci_hcd/2p, 12M
+/:  Bus 04.Port 1: Dev 1, Class=root_hub, Driver=uhci_hcd/2p, 12M
+/:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=uhci_hcd/2p, 12M
+/:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=uhci_hcd/2p, 12M
+    |__ Port 2: Dev 2, If 0, Class=Human Interface Device, Driver=usbhid, 1.5M
+    |__ Port 2: Dev 2, If 1, Class=Human Interface Device, Driver=usbhid, 1.5M
+/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=ehci-pci/8p, 480M
+198022@client03:~$ lspci -tv
+-[0000:00]-+-00.0  Intel Corporation 82865G/PE/P DRAM Controller/Host-Hub Interface
+           +-02.0  Intel Corporation 82865G Integrated Graphics Controller
+           +-06.0  Intel Corporation 82865G/PE/P Processor to I/O Memory Interface
+           +-1d.0  Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #1
+           +-1d.1  Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #2
+           +-1d.2  Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #3
+           +-1d.3  Intel Corporation 82801EB/ER (ICH5/ICH5R) USB UHCI Controller #4
+           +-1d.7  Intel Corporation 82801EB/ER (ICH5/ICH5R) USB2 EHCI Controller
+           +-1e.0-[01]----08.0  Intel Corporation 82562EZ 10/100 Ethernet Controller
+           +-1f.0  Intel Corporation 82801EB/ER (ICH5/ICH5R) LPC Interface Bridge
+           +-1f.1  Intel Corporation 82801EB/ER (ICH5/ICH5R) IDE Controller
+           +-1f.3  Intel Corporation 82801EB/ER (ICH5/ICH5R) SMBus Controller
+           \-1f.5  Intel Corporation 82801EB/ER (ICH5/ICH5R) AC'97 Audio Controller
+198022@client03:~$ whoami
+198022
+198022@client03:~$ who
+198022   tty7         2019-10-05 16:34 (:0)
+198022@client03:~$ id
+uid=198022(198022) gid=198022(198022) groups=198022(198022)
+198022@client03:~$ cal
+    Октябрь 2019      
+Вс Пн Вт Ср Чт Пт Сб  
+       1  2  3  4  5  
+ 6  7  8  9 10 11 12  
+13 14 15 16 17 18 19  
+20 21 22 23 24 25 26  
+27 28 29 30 31        
+                      
+198022@client03:~$ date
+Сб окт  5 17:00:13 EET 2019
+198022@client03:~$ arch
+i686
+198022@client03:~$ uptime
+ 17:00:29 up 28 min,  1 user,  load average: 0,28, 0,34, 0,24
+198022@client03:~$ history
+    1  cat head.txt
+    2  clear
+    3  cat head.txt
+    4  clear
+    5  cat head.tx
+    6  clear
+    7  cat head.txt
+    8  clead
+    9  clear
+   10  cat head.txt
+   11  cleat
+   12  clear
+   13  cat head.txt
+   14  clear
+   15  cat head.txt
+   16  clear
+   17  cat head.txt
+   18  clear
+   19  cat head.txt
+   20  clear
+   21  cat head.txt
+   22  clear
+   23  cat head.txt
+   24  hostname
+   25  uname -m
+   26  uname -r
+   27  lsusb
+   28  cat head.txt
+   29  hostname
+   30  uname -m
+   31  uname -r
+   32  lsusb -tv
+   33  lspci -tv
+   34  whoami
+   35  who
+   36  w
+   37  id
+   38  cal
+   39  calendar
+   40  date
+   41  cat/proc/version
+   42  cat/proc/cpinfo
+   43  cat/proc/meminfo
+   44  cat/proc/interrupts
+   45  cat/proc/swaps
+   46  arch
+   47  uptime
+   48  history
+   49  ps
+   50  jobs
+   51  top
+   52  pwd
+   53  ls
+   54  cd
+   55  cd /
+   56  cd -
+   57  cd ~user
+   58  cd ..
+   59  cd ../..
+   60  ls -a
+   61  ls -F
+   62  ls -l
+   63  du
+   64  cat head.txt
+   65  hostname
+   66  uname -m
+   67  uname -r
+   68  lsusb -tv
+   69  lspci -tv
+   70  whoami
+   71  who
+   72  id
+   73  cal
+   74  date
+   75  arch
+   76  uptime
+   77  history
+198022@client03:~$ ps
+  PID TTY          TIME CMD
+ 1607 pts/0    00:00:00 bash
+ 1639 pts/0    00:00:00 ps
+198022@client03:~$ jobs
+198022@client03:~$ pwd
+/stud/198022
+198022@client03:~$ ls
+head.txt  Видео  Документы  Загрузки  Изображения  Музыка  Общедоступные  Рабочий стол  Шаблоны
+198022@client03:~$ cd
+198022@client03:~$ cd /
+198022@client03:/$ cd -
+/stud/198022
+198022@client03:~$ cd ~user
+bash: cd: ~user: No such file or directory
+198022@client03:~$ cd ..
+198022@client03:/stud$ cd ../..
+198022@client03:/$ ls -a
+.   bin   cdrom  etc   initrd.img  lost+found  mnt  proc  run   snap  stud      sys  usr  vmlinuz
+..  boot  dev    home  lib         media       opt  root  sbin  srv   swapfile  tmp  var
+198022@client03:/$ ls -F
+bin/   cdrom/  etc/   initrd.img@  lost+found/  mnt/  proc/  run/   snap/  stud/     sys/  usr/  vmlinuz@
+boot/  dev/    home/  lib/         media/       opt/  root/  sbin/  srv/   swapfile  tmp/  var/
+198022@client03:/$ ls -l
+total 1809400
+drwxr-xr-x    2 root root       4096 сен  1  2017 bin
+drwxr-xr-x    3 root root       4096 авг 28  2017 boot
+drwxrwxr-x    2 root root       4096 авг 28  2017 cdrom
+drwxr-xr-x   20 root root       3960 окт  5 16:32 dev
+drwxr-xr-x  124 root root      12288 сен  8  2018 etc
+drwxr-xr-x   20 root root       4096 сен  4 12:43 home
+lrwxrwxrwx    1 root root         33 авг 28  2017 initrd.img -> boot/initrd.img-4.10.0-19-generic
+drwxr-xr-x   19 root root       4096 авг 31  2017 lib
+drwx------    2 root root      16384 авг 28  2017 lost+found
+drwxr-xr-x   23 root root       4096 сен 28 17:05 media
+drwxr-xr-x    2 root root       4096 апр 12  2017 mnt
+drwxr-xr-x    2 root root       4096 апр 12  2017 opt
+dr-xr-xr-x  144 root root          0 окт  5 16:32 proc
+drwx------   17 root root       4096 сен  1 14:34 root
+drwxr-xr-x   27 root root        880 окт  5 16:34 run
+drwxr-xr-x    2 root root       4096 сен  1  2017 sbin
+drwxr-xr-x    2 root root       4096 апр  6  2017 snap
+drwxr-xr-x    2 root root       4096 апр 12  2017 srv
+drwxr-xr-x 1291 root root      36864 сен  1 03:25 stud
+-rw-------    1 root root 1852687360 авг 28  2017 swapfile
+dr-xr-xr-x   13 root root          0 окт  5 16:57 sys
+drwxrwxrwt   12 root root       4096 окт  5 16:59 tmp
+drwxr-xr-x   11 root root       4096 апр 12  2017 usr
+drwxr-xr-x   14 root root       4096 апр 12  2017 var
+lrwxrwxrwx    1 root root         30 авг 28  2017 vmlinuz -> boot/vmlinuz-4.10.0-19-generic
+198022@client03:/$ df
+Filesystem           1K-blocks      Used  Available Use% Mounted on
+udev                    614996         0     614996   0% /dev
+tmpfs                   127148      5904     121244   5% /run
+/dev/sda1             38204980   5367756   30866792  15% /
+tmpfs                   635728         0     635728   0% /dev/shm
+tmpfs                     5120         4       5116   1% /run/lock
+tmpfs                   635728         0     635728   0% /sys/fs/cgroup
+192.168.2.200:/stud 1442013184 119593984 1249145856   9% /stud
+192.168.2.200:/home   59357184  55290880    1028096  99% /home
+tmpfs                   127144        20     127124   1% /run/user/198022
+198022@client03:/$ dd
+^C0+0 records in
+0+0 records out
+0 bytes copied, 25,2011 s, 0,0 kB/s
+198022@client03:~$ cat > file1.txt
+HELLO WORLD
+Hello World
+hello world
+198022@client03:~$ touch file2.txt
+198022@client03:~$ cp file1.txt file2.txt
+198022@client03:~$ cat file1.txt file2.txt > file3.txt
+198022@client03:~$ mv file3.txt newfile4.txt
+198022@client03:~$ tac newfile4.txt
+hello world
+Hello World
+HELLO WORLD
+hello world
+Hello World
+HELLO WORLD
+198022@client03:~$ cat newfile4.txt
+HELLO WORLD
+Hello World
+hello world
+HELLO WORLD
+Hello World
+hello world
+198022@client03:~$ cat -n newfile4.txt
+     1	HELLO WORLD
+     2	Hello World
+     3	hello world
+     4	HELLO WORLD
+     5	Hello World
+     6	hello world
+198022@client03:~$ head -1 newfile4.txt
+HELLO WORLD
+198022@client03:~$ tail -2  newfile4.txt
+Hello World
+hello world
+198022@client03:~$ wc newfile4.txt
+ 6 12 72 newfile4.txt
+198022@client03:~$ cp newfile4.txt newfile5.txt
+198022@client03:~$ rm f1.txt
+198022@client03:~$ rm newfile4.txt
+198022@client03:~$ mkdir papka1
+198022@client03:~$ mv newfile5.txt papka1
+198022@client03:~$ find newfile5.txt
+find: ‘newfile5.txt’: No such file or directory
+198022@client03:~$ locate papka1
+198022@client03:~$ rmdir papka1
+rmdir: failed to remove 'papka1': Directory not empty
+198022@client03:~$ ls
+file1.txt  file2.txt  head.txt  papka1  protokol.txt  Видео  Документы  Загрузки  Изображения  Музыка  Общедоступные  Рабочий стол  Шаблоны
+198022@client03:~$ cd papka1
+198022@client03:~/papka1$ ls
+newfile5.txt
+198022@client03:~/papka1$ rm newfile5.txt
+198022@client03:~/papka1$ ls
+198022@client03:~/papka1$ cd ..
+198022@client03:~$ rmdir papka1
+198022@client03:~$ tree
+198022@client03:~$ free
+              total        used        free      shared  buff/cache   available
+Mem:        1271460      150864      541520       86220      579076      829724
+198022@client03:~$ echo Hello
+Hello
+198022@client03:~$ echo -e "Hello \nworld \n!"
+Hello 
+world 
+!
+198022@client03:~$ echo -e "033[35mViolet"
+Violet
+198022@client03:~$ echo -e "033[46mBlue"
+Blue
+198022@client03:~$ factor 47
+47: 47
+198022@client03:~$ factor 15
+15: 3 5
+198022@client03:~$ factor 49
+49: 7 7
