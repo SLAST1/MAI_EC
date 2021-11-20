@@ -34,7 +34,7 @@ int main(){
     printMatrix(array);
     printf("Результат:\n");
 
-    for(int i = 0; i < size; i++){
+    for(int i = 0; i < size; i++){ //против часовой от 11 к центру
         for(int t = k/4; t < (size - k/4); t++)
             printf("%d ", array[t][k/4]);
         k++;
@@ -50,6 +50,45 @@ int main(){
     }
     printf("\n");
 }
+/* против часов от ПрВр края налево
+    int bu=0,bd=size,br=size,bl=0;
+    while(((bd-bu)>0)||((br-bl)>0)){
+        for(int j=br-1;j>=bl;j--)
+            printf("%d ", array[bu][j]);
+        bu++;
+        for(int j=bu;j<bd;j++)
+            printf("%d ", array[j][bl]);
+        bl++;
+        for(int j=bl;j<br;j++)
+            printf("%d ", array[bd-1][j]);
+        bd--;
+        for(int j=bd-1;j>=bu;j--)
+            printf("%d ", array[j][br-1]);
+        br--;
+    }
+    printf("\n");
+
+
+    по часовой от ПрВр края вниз
+    int bu=0,bd=size,br=size,bl=0;
+    while(((bd-bu)>0)||((br-bl)>0)){
+        for(int j=bu;j<bd;j++){
+            printf("%d ", array[j][br-1]);
+        }
+        br--;
+        for(int j=br-1;j>=bl;j--){
+            printf("%d ", array[bd-1][j]);
+        }
+        bd--;
+        for(int j=bd-1;j>=bu;j--){
+            printf("%d ", array[j][bl]);
+        }
+        bl++;
+        for(int j=bl;j<br;j++){
+            printf("%d ", array[bu][j]);
+        }
+        bu++;
+*/
 
 void printMatrix(int matrix[9][9]){
     for(int i = 0; i < size; i++){
